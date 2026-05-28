@@ -1,0 +1,242 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   LIGHT theme — DEFAULT (warm parchment + rust)
+   ============================================================ */
+:root, .light {
+  color-scheme: light;
+
+  --c-ink-950:  235 226 209;
+  --c-ink-900:  245 239 227;   /* page bg — parchment cream */
+  --c-ink-800:  234 224 204;
+  --c-ink-700:  218 207 184;
+
+  --c-paper-50:  35 30 22;
+  --c-paper-100: 26 24 20;     /* primary text — dark on cream */
+  --c-paper-200: 70 60 48;
+  --c-paper-300: 115 100 80;
+
+  --c-accent:   194 85 57;     /* rust */
+  --c-accent-d: 158 64 38;
+  --c-accent-2: 168 125 70;    /* sienna */
+  --c-accent-3: 200 165 110;
+  --c-accent-4: 220 185 140;
+
+  --c-border:    0 0 0;
+  --surface:     rgba(26,24,20,0.04);
+  --surface-2:   rgba(26,24,20,0.07);
+  --border-soft: rgba(26,24,20,0.10);
+  --border-mid:  rgba(26,24,20,0.16);
+  --scene-bg:    245 239 227;
+}
+
+/* ============================================================
+   DARK theme — opt-in via .dark on <html>
+   ============================================================ */
+.dark {
+  color-scheme: dark;
+
+  --c-ink-950:  7 6 5;
+  --c-ink-900:  14 13 11;
+  --c-ink-800:  21 19 15;
+  --c-ink-700:  30 27 22;
+
+  --c-paper-50:  250 245 235;
+  --c-paper-100: 242 237 227;
+  --c-paper-200: 217 210 194;
+  --c-paper-300: 160 149 135;
+
+  --c-accent:   255 139 92;
+  --c-accent-d: 245 112 78;
+  --c-accent-2: 234 182 131;
+  --c-accent-3: 245 213 180;
+  --c-accent-4: 255 217 184;
+
+  --c-border:    255 255 255;
+  --surface:     rgba(255,255,255,0.03);
+  --surface-2:   rgba(255,255,255,0.05);
+  --border-soft: rgba(255,255,255,0.07);
+  --border-mid:  rgba(255,255,255,0.10);
+  --scene-bg:    14 13 11;
+}
+
+* { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+html, body, #root { height: 100%; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: rgb(var(--c-ink-900));
+  color:      rgb(var(--c-paper-100));
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 280ms ease, color 280ms ease;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background: rgb(var(--c-accent) / 0.40); border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::selection { background: rgb(var(--c-accent) / 0.30); color: rgb(var(--c-paper-100)); }
+
+@layer components {
+  .glass {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .glass-strong {
+    background: var(--surface-2);
+    border: 1px solid var(--border-mid);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  .text-gradient {
+    background: linear-gradient(95deg,
+      rgb(var(--c-paper-100)) 0%,
+      rgb(var(--c-accent))    55%,
+      rgb(var(--c-accent-2))  100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-full px-5 py-2.5
+      font-mono text-[13px] uppercase tracking-[0.12em] font-medium
+      transition-all duration-300;
+    background: rgb(var(--c-paper-100));
+    color:      rgb(var(--c-ink-900));
+  }
+  .btn-primary:hover {
+    background: rgb(var(--c-accent));
+    color:      #fff;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 rounded-full px-5 py-2.5
+      font-mono text-[13px] uppercase tracking-[0.12em]
+      transition-all duration-300;
+    color: rgb(var(--c-paper-100) / 0.85);
+    border: 1px solid var(--border-mid);
+  }
+  .btn-ghost:hover { color: rgb(var(--c-accent)); border-color: rgb(var(--c-accent) / 0.55); }
+
+  .chip {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-mono;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    color: rgb(var(--c-paper-100) / 0.85);
+  }
+  .chip-acid {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-mono;
+    background: rgb(var(--c-accent) / 0.10);
+    border: 1px solid rgb(var(--c-accent) / 0.40);
+    color: rgb(var(--c-accent));
+  }
+
+  .section { @apply relative w-full px-6 md:px-12 lg:px-24 py-24 md:py-32; }
+  .h-display { @apply font-display font-semibold tracking-tight leading-[0.95]; }
+
+  .h-mega {
+    font-family: 'Space Grotesk', Inter, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 0.92;
+    font-size: clamp(2.6rem, 10vw, 9rem);
+  }
+  .accent-italic {
+    font-family: 'Instrument Serif', ui-serif, Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    font-size: 1.05em;
+  }
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .h-rule { background: var(--border-soft); height: 1px; width: 100%; }
+}
+
+.bg-aurora {
+  background:
+    radial-gradient(900px 600px at 12% 6%,  rgb(var(--c-accent)   / 0.12), transparent 60%),
+    radial-gradient(900px 700px at 92% 28%, rgb(var(--c-accent-2) / 0.08), transparent 60%),
+    radial-gradient(700px 700px at 50% 100%, rgb(var(--c-accent-3) / 0.06), transparent 60%),
+    rgb(var(--c-ink-900));
+}
+
+.noise::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
+  opacity: 0.025; mix-blend-mode: overlay;
+}
+
+.scroll-h {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.scroll-h::-webkit-scrollbar { display: none; }
+.snap-card { scroll-snap-align: start; scroll-snap-stop: always; }
+
+/* ============================================================
+   LEGACY WHITE-TEXT REMAP — many components still use literal
+   "text-white/X" / "border-white/X" / "bg-white/[X]" from the
+   old dark-mode era. In LIGHT (default) swap them to dark ink.
+   Dark mode keeps original behaviour.
+   ============================================================ */
+:root:not(.dark) .text-white,
+.light .text-white            { color: rgb(var(--c-paper-100)); }
+
+:root:not(.dark) .text-white\/95,  .light .text-white\/95  { color: rgb(var(--c-paper-100) / 0.95); }
+:root:not(.dark) .text-white\/90,  .light .text-white\/90  { color: rgb(var(--c-paper-100) / 0.92); }
+:root:not(.dark) .text-white\/85,  .light .text-white\/85  { color: rgb(var(--c-paper-100) / 0.88); }
+:root:not(.dark) .text-white\/80,  .light .text-white\/80  { color: rgb(var(--c-paper-100) / 0.85); }
+:root:not(.dark) .text-white\/75,  .light .text-white\/75  { color: rgb(var(--c-paper-100) / 0.80); }
+:root:not(.dark) .text-white\/70,  .light .text-white\/70  { color: rgb(var(--c-paper-100) / 0.78); }
+:root:not(.dark) .text-white\/65,  .light .text-white\/65  { color: rgb(var(--c-paper-100) / 0.74); }
+:root:not(.dark) .text-white\/60,  .light .text-white\/60  { color: rgb(var(--c-paper-100) / 0.70); }
+:root:not(.dark) .text-white\/55,  .light .text-white\/55  { color: rgb(var(--c-paper-100) / 0.66); }
+:root:not(.dark) .text-white\/50,  .light .text-white\/50  { color: rgb(var(--c-paper-100) / 0.62); }
+:root:not(.dark) .text-white\/45,  .light .text-white\/45  { color: rgb(var(--c-paper-100) / 0.58); }
+:root:not(.dark) .text-white\/40,  .light .text-white\/40  { color: rgb(var(--c-paper-100) / 0.55); }
+:root:not(.dark) .text-white\/35,  .light .text-white\/35  { color: rgb(var(--c-paper-100) / 0.50); }
+:root:not(.dark) .text-white\/30,  .light .text-white\/30  { color: rgb(var(--c-paper-100) / 0.45); }
+:root:not(.dark) .text-white\/25,  .light .text-white\/25  { color: rgb(var(--c-paper-100) / 0.40); }
+
+:root:not(.dark) .placeholder-white\/35::placeholder,
+.light .placeholder-white\/35::placeholder { color: rgb(var(--c-paper-100) / 0.45); }
+
+:root:not(.dark) .border-white\/30, .light .border-white\/30 { border-color: rgb(var(--c-paper-100) / 0.25); }
+:root:not(.dark) .border-white\/20, .light .border-white\/20 { border-color: rgb(var(--c-paper-100) / 0.18); }
+:root:not(.dark) .border-white\/15, .light .border-white\/15 { border-color: rgb(var(--c-paper-100) / 0.14); }
+:root:not(.dark) .border-white\/10, .light .border-white\/10 { border-color: rgb(var(--c-paper-100) / 0.10); }
+:root:not(.dark) .border-white\/\[0\.06\], .light .border-white\/\[0\.06\] { border-color: rgb(var(--c-paper-100) / 0.10); }
+:root:not(.dark) .border-white\/\[0\.07\], .light .border-white\/\[0\.07\] { border-color: rgb(var(--c-paper-100) / 0.11); }
+:root:not(.dark) .border-white\/\[0\.08\], .light .border-white\/\[0\.08\] { border-color: rgb(var(--c-paper-100) / 0.12); }
+
+:root:not(.dark) .bg-white\/\[0\.025\], .light .bg-white\/\[0\.025\] { background-color: rgb(var(--c-paper-100) / 0.035); }
+:root:not(.dark) .bg-white\/\[0\.03\],  .light .bg-white\/\[0\.03\]  { background-color: rgb(var(--c-paper-100) / 0.04); }
+:root:not(.dark) .bg-white\/\[0\.04\],  .light .bg-white\/\[0\.04\]  { background-color: rgb(var(--c-paper-100) / 0.05); }
+:root:not(.dark) .bg-white\/\[0\.05\],  .light .bg-white\/\[0\.05\]  { background-color: rgb(var(--c-paper-100) / 0.06); }
+:root:not(.dark) .bg-white\/\[0\.06\],  .light .bg-white\/\[0\.06\]  { background-color: rgb(var(--c-paper-100) / 0.07); }
+:root:not(.dark) .bg-white\/\[0\.07\],  .light .bg-white\/\[0\.07\]  { background-color: rgb(var(--c-paper-100) / 0.08); }
+:root:not(.dark) .bg-white\/15,         .light .bg-white\/15         { background-color: rgb(var(--c-paper-100) / 0.10); }
+
+/* ink-950 gradient stops fade to page-bg in light, not pure black */
+:root:not(.dark) .from-ink-950, .light .from-ink-950 {
+  --tw-gradient-from: rgb(var(--c-ink-900)) var(--tw-gradient-from-position);
+  --tw-gradient-to:   rgb(var(--c-ink-900) / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+:root:not(.dark) .to-ink-950, .light .to-ink-950 {
+  --tw-gradient-to: rgb(var(--c-ink-900)) var(--tw-gradient-to-position);
+}
+:root:not(.dark) .via-ink-950\/30, .light .via-ink-950\/30 {
+  --tw-gradient-via: rgb(var(--c-ink-900) / 0.30);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to);
+}
+
+/* Pure-white literal backgrounds (e.g. btn) — already covered by btn-primary */
+:root:not(.dark) .bg-white, .light .bg-white { background-color: rgb(var(--c-paper-100)); color: rgb(var(--c-ink-900)); }
