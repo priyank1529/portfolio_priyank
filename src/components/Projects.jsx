@@ -38,7 +38,7 @@ export default function Projects() {
     <section id="projects" ref={sectionRef} className="relative py-24 md:py-32">
       {/* sticky header — solid bg, strong contrast, accent rule */}
       <div
-        className="sticky top-0 z-30 pt-24 pb-6 px-6 md:px-12 lg:px-24 border-b"
+        className="sticky top-0 z-30 pt-20 sm:pt-24 pb-5 sm:pb-6 px-5 sm:px-6 md:px-12 lg:px-24 border-b"
         style={{
           background: 'rgb(var(--c-ink-900) / 0.94)',
           backdropFilter: 'blur(20px)',

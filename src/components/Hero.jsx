@@ -68,10 +68,10 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-ink-900/80 to-transparent z-[1]" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink-900 to-transparent z-[1]" />
 
-      <div className="relative z-10 min-h-screen flex flex-col px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
+      <div className="relative z-10 min-h-screen flex flex-col px-5 sm:px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
         <motion.div initial={{ opacity:0, y:-8 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.7 }}
-          className="pt-28 md:pt-32 flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.22em]">
-          <div className="flex items-center gap-2.5 text-paper-100/70">
+          className="pt-24 sm:pt-28 md:pt-32 flex items-center justify-between gap-3 text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.16em] sm:tracking-[0.22em]">
+          <div className="flex items-center gap-2.5 text-paper-100/70 min-w-0">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inset-0 rounded-full bg-accent-blue animate-ping opacity-75" />
               <span className="relative h-1.5 w-1.5 rounded-full bg-accent-blue" />

@@ -1,11 +1,24 @@
-import { Suspense, useMemo, useRef } from 'react';
+import { Suspense, useMemo, useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Sparkles } from '@react-three/drei';
 import { EffectComposer, Bloom, Noise } from '@react-three/postprocessing';
 import * as THREE from 'three';
 import { useThemeReactive } from '../lib/theme.js';
 
-const COUNT = 3200;
+/* Mobile = fewer particles, no postprocessing, lower dpr. Heavy GPU work
+   tanks phones; detect once at mount via coarse pointer / small viewport. */
+function useIsMobile() {
+  const [mobile, setMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px), (pointer: coarse)');
+    const on = () => setMobile(mq.matches);
+    on();
+    mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, []);
+  return mobile;
+}
+
 const FIELD_R = 7;
 const REPEL_R = 1.9;
 const REPEL_R2 = REPEL_R * REPEL_R;
@@ -66,7 +79,7 @@ function pickColor(t, stops) {
   ];
 }
 
-function DotField({ palette }) {
+function DotField({ palette, count: COUNT }) {
   const ref = useRef();
   const { viewport, mouse } = useThree();
 
@@ -88,7 +101,7 @@ function DotField({ palette }) {
       baseR[i] = Math.min(1, r / FIELD_R);
     }
     return { positions, basePositions: base, velocities: vel, baseRadius: baseR };
-  }, []);
+  }, [COUNT]);
 
   const colors = useMemo(() => {
     const col = new Float32Array(COUNT * 3);
@@ -193,13 +206,16 @@ function CameraParallax() {
 export default function Scene3D() {
   const theme = useThemeReactive();
   const palette = PALETTE[theme];
+  const isMobile = useIsMobile();
+
+  const count = isMobile ? 1100 : 3200;
 
   return (
     <div className="absolute inset-0 -z-0">
       <Canvas
-        dpr={[1, 1.7]}
+        dpr={isMobile ? [1, 1.4] : [1, 1.7]}
         camera={{ position: [0, 0, 7], fov: 50 }}
-        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+        gl={{ antialias: !isMobile, alpha: true, powerPreference: 'high-performance' }}
       >
         <color attach="background" args={[palette.bg]} />
         <fog attach="fog" args={[palette.fog, 9, 22]} />
@@ -209,16 +225,19 @@ export default function Scene3D() {
         <pointLight position={[-6, -4, 4]} intensity={0.7} color={palette.light2} />
 
         <Suspense fallback={null}>
-          <CameraParallax />
-          <DotField palette={palette} />
-          <CursorComet palette={palette} />
-          <Sparkles count={70} scale={[14, 8, 8]} size={1.4} speed={0.25} color={palette.sparkle} />
+          {!isMobile && <CameraParallax />}
+          <DotField palette={palette} count={count} />
+          {!isMobile && <CursorComet palette={palette} />}
+          <Sparkles count={isMobile ? 30 : 70} scale={[14, 8, 8]} size={1.4} speed={0.25} color={palette.sparkle} />
         </Suspense>
 
-        <EffectComposer multisampling={0}>
-          <Bloom intensity={palette.bloom} luminanceThreshold={0.18} luminanceSmoothing={0.22} mipmapBlur />
-          <Noise opacity={0.025} />
-        </EffectComposer>
+        {/* postprocessing (bloom) is expensive — desktop only */}
+        {!isMobile && (
+          <EffectComposer multisampling={0}>
+            <Bloom intensity={palette.bloom} luminanceThreshold={0.18} luminanceSmoothing={0.22} mipmapBlur />
+            <Noise opacity={0.025} />
+          </EffectComposer>
+        )}
       </Canvas>
     </div>
   );
