@@ -1,11 +1,12 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Cursor() {
   const dot = useRef(null);
   const ring = useRef(null);
+  const [coarse, setCoarse] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia('(pointer: coarse)').matches) return;
+    if (window.matchMedia('(pointer: coarse)').matches) { setCoarse(true); return; }
     let x = 0, y = 0, rx = 0, ry = 0;
     const onMove = (e) => { x = e.clientX; y = e.clientY; };
     window.addEventListener('mousemove', onMove);
@@ -29,6 +30,8 @@ export default function Cursor() {
 
     return () => { cancelAnimationFrame(raf); window.removeEventListener('mousemove', onMove); };
   }, []);
+
+  if (coarse) return null;
 
   return (
     <>

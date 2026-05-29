@@ -128,21 +128,21 @@ export default function Terminal() {
         <motion.div initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true, amount:0.3 }}
           transition={{ duration: 0.8, delay: 0.1 }} className="lg:col-span-7">
           <div className="relative glass-strong rounded-2xl overflow-hidden shadow-glow">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06] bg-black/30">
-              <div className="flex items-center gap-2">
-                <span className="h-3 w-3 rounded-full bg-rose-400/80" />
-                <span className="h-3 w-3 rounded-full bg-amber-300/80" />
-                <span className="h-3 w-3 rounded-full bg-emerald-400/80" />
-                <span className="ml-3 inline-flex items-center gap-2 text-xs font-mono text-white/55">
-                  <TerminalIcon size={12} /> ~/adsales-rag · hybrid_rag.py
+            <div className="flex items-center justify-between gap-2 px-4 py-3 border-b border-white/[0.06] bg-black/30">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="h-3 w-3 rounded-full bg-rose-400/80 flex-none" />
+                <span className="h-3 w-3 rounded-full bg-amber-300/80 flex-none" />
+                <span className="h-3 w-3 rounded-full bg-emerald-400/80 flex-none" />
+                <span className="ml-3 inline-flex items-center gap-2 text-xs font-mono text-white/55 min-w-0">
+                  <TerminalIcon size={12} className="flex-none" /> <span className="truncate"><span className="hidden sm:inline">~/adsales-rag · </span>hybrid_rag.py</span>
                 </span>
               </div>
-              <button onClick={copy} className="text-xs font-mono text-white/55 hover:text-white inline-flex items-center gap-1.5">
+              <button onClick={copy} className="text-xs font-mono text-white/55 hover:text-white inline-flex items-center gap-1.5 flex-none">
                 {copied ? <><Check size={12}/> copied</> : <><Copy size={12}/> copy</>}
               </button>
             </div>
 
-            <pre className="px-5 py-5 text-[12.5px] md:text-[13px] font-mono leading-relaxed overflow-x-auto whitespace-pre">
+            <pre className="px-4 sm:px-5 py-5 text-[11.5px] sm:text-[12.5px] md:text-[13px] font-mono leading-relaxed overflow-x-auto whitespace-pre">
               {highlight(shown)}
               <span className="inline-block w-2 h-4 align-text-bottom bg-neon-cyan animate-pulse" />
             </pre>

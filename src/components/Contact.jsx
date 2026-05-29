@@ -36,17 +36,17 @@ export default function Contact() {
           <p className="mt-5 text-white/65 max-w-md">Architecture review, GenAI build-out, or a discovery call — I respond within 24 hours.</p>
 
           <div className="mt-10 space-y-3">
-            <a href={`mailto:${profile.email}`} className="flex items-center gap-3 text-white/80 hover:text-white transition group">
-              <span className="h-9 w-9 inline-flex items-center justify-center rounded-xl glass"><Mail size={16}/></span>
-              {profile.email}
+            <a href={`mailto:${profile.email}`} className="flex items-center gap-3 text-white/80 hover:text-white transition group min-w-0">
+              <span className="h-10 w-10 flex-none inline-flex items-center justify-center rounded-xl glass"><Mail size={16}/></span>
+              <span className="break-all">{profile.email}</span>
             </a>
             <div className="flex items-center gap-3 text-white/80">
-              <span className="h-9 w-9 inline-flex items-center justify-center rounded-xl glass"><MapPin size={16}/></span>
+              <span className="h-10 w-10 flex-none inline-flex items-center justify-center rounded-xl glass"><MapPin size={16}/></span>
               {profile.location}
             </div>
             <div className="flex items-center gap-3">
-              <a href={profile.github} target="_blank" rel="noreferrer" className="h-9 w-9 inline-flex items-center justify-center rounded-xl glass hover:border-white/30 transition"><Github size={16}/></a>
-              <a href={profile.linkedin} target="_blank" rel="noreferrer" className="h-9 w-9 inline-flex items-center justify-center rounded-xl glass hover:border-white/30 transition"><Linkedin size={16}/></a>
+              <a href={profile.github} target="_blank" rel="noreferrer" className="h-10 w-10 inline-flex items-center justify-center rounded-xl glass hover:border-white/30 transition"><Github size={16}/></a>
+              <a href={profile.linkedin} target="_blank" rel="noreferrer" className="h-10 w-10 inline-flex items-center justify-center rounded-xl glass hover:border-white/30 transition"><Linkedin size={16}/></a>
             </div>
           </div>
         </motion.div>

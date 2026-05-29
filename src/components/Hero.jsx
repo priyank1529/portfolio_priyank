@@ -117,10 +117,10 @@ export default function Hero() {
               <span aria-hidden>→</span>
             </a>
 
-            <div className="ml-auto flex items-center gap-3 text-paper-100/50">
-              <a href={profile.github} target="_blank" rel="noreferrer" className="hover:text-accent-blue transition" aria-label="GitHub"><Github size={16}/></a>
-              <a href={profile.linkedin} target="_blank" rel="noreferrer" className="hover:text-accent-blue transition" aria-label="LinkedIn"><Linkedin size={16}/></a>
-              <a href={`mailto:${profile.email}`} className="hover:text-accent-blue transition" aria-label="Email"><Mail size={16}/></a>
+            <div className="ml-auto flex items-center gap-1 text-paper-100/50">
+              <a href={profile.github} target="_blank" rel="noreferrer" className="inline-flex h-10 w-10 items-center justify-center hover:text-accent-blue transition" aria-label="GitHub"><Github size={18}/></a>
+              <a href={profile.linkedin} target="_blank" rel="noreferrer" className="inline-flex h-10 w-10 items-center justify-center hover:text-accent-blue transition" aria-label="LinkedIn"><Linkedin size={18}/></a>
+              <a href={`mailto:${profile.email}`} className="inline-flex h-10 w-10 items-center justify-center hover:text-accent-blue transition" aria-label="Email"><Mail size={18}/></a>
             </div>
           </motion.div>
         </div>

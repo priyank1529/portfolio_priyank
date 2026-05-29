@@ -80,8 +80,8 @@ export default function Nav() {
 
           <div className="md:hidden flex items-center gap-2">
             <ThemeToggle theme={theme} toggle={toggle} compact />
-            <button className="text-paper-100" onClick={()=>setOpen((s)=>!s)} aria-label="Menu">
-              {open ? <X size={20}/> : <Menu size={20}/>}
+            <button className="text-paper-100 inline-flex h-10 w-10 items-center justify-center -mr-2" onClick={()=>setOpen((s)=>!s)} aria-label="Menu" aria-expanded={open}>
+              {open ? <X size={22}/> : <Menu size={22}/>}
             </button>
           </div>
         </div>
@@ -89,10 +89,11 @@ export default function Nav() {
         {open && (
           <motion.div initial={{ opacity:0, y:-8 }} animate={{ opacity:1, y:0 }} className="md:hidden border-t"
             style={{ background: 'rgb(var(--c-ink-900) / 0.95)', borderColor: 'var(--border-mid)' }}>
-            <div className="px-6 py-4 grid gap-2">
+            <div className="px-6 py-4 grid gap-1">
               {links.map((l)=>(
-                <button key={l.id} onClick={()=>go(l.id)} className="text-left py-2 font-mono uppercase tracking-[0.16em] text-paper-100/80 hover:text-accent-blue">{l.label}</button>
+                <button key={l.id} onClick={()=>go(l.id)} className="text-left py-3 text-[15px] font-mono uppercase tracking-[0.16em] text-paper-100/80 hover:text-accent-blue">{l.label}</button>
               ))}
+              <a href="#contact" onClick={(e)=>{e.preventDefault();go('contact');}} className="mt-2 btn-primary justify-center">let's talk</a>
             </div>
           </motion.div>
         )}

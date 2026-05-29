@@ -82,7 +82,7 @@ export default function Projects() {
         <div className="max-w-7xl mx-auto mt-5 flex flex-wrap items-center gap-2">
           {filters.map((f) => (
             <button key={f} onClick={() => setFilter(f)}
-              className={`chip transition ${filter === f ? 'chip-acid' : ''}`}>
+              className={`chip !py-1.5 transition ${filter === f ? 'chip-acid !py-1.5' : ''}`}>
               {f}
             </button>
           ))}
