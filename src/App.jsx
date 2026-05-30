@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import Lenis from 'lenis';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Nav from './components/Nav.jsx';
 import Cursor from './components/Cursor.jsx';
 import ScrollProgress from './components/ScrollProgress.jsx';
@@ -42,6 +44,8 @@ export default function App() {
       </main>
       {/* <CommandPalette /> */}
       {/* <AIAssistant /> */}
+      <Analytics />
+      <SpeedInsights />
     </div>
   );
 }
