@@ -226,7 +226,7 @@ export default function Scene3D() {
 
         <Suspense fallback={null}>
           {!isMobile && <CameraParallax />}
-          <DotField palette={palette} count={count} />
+          <DotField key={count} palette={palette} count={count} />
           {!isMobile && <CursorComet palette={palette} />}
           <Sparkles count={isMobile ? 30 : 70} scale={[14, 8, 8]} size={1.4} speed={0.25} color={palette.sparkle} />
         </Suspense>

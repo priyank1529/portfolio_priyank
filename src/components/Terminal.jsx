@@ -103,9 +103,9 @@ export default function Terminal() {
     <section ref={ref} className="relative section">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-10 items-start">
         <motion.div initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true, amount:0.3 }}
-          transition={{ duration: 0.8 }} className="lg:col-span-5">
+          transition={{ duration: 0.8 }} className="lg:col-span-5 min-w-0">
           <div className="text-xs font-mono uppercase tracking-[0.3em] text-neon-cyan">// in the wild</div>
-          <h2 className="h-display text-4xl md:text-5xl mt-4">This is what <span className="text-gradient">production GenAI</span> looks like.</h2>
+          <h2 className="h-display text-3xl sm:text-4xl md:text-5xl mt-4 break-words">This is what <span className="text-gradient">production GenAI</span> looks like.</h2>
           <p className="mt-5 text-white/65 leading-relaxed">
             Not a demo. The actual shape of a hybrid retrieval pass: vector + BM25 + Reciprocal Rank Fusion + cross-encoder rerank.
             Streamed token-by-token, the way the model would write it.
@@ -126,8 +126,8 @@ export default function Terminal() {
         </motion.div>
 
         <motion.div initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true, amount:0.3 }}
-          transition={{ duration: 0.8, delay: 0.1 }} className="lg:col-span-7">
-          <div className="relative glass-strong rounded-2xl overflow-hidden shadow-glow">
+          transition={{ duration: 0.8, delay: 0.1 }} className="lg:col-span-7 min-w-0">
+          <div className="relative glass-strong rounded-2xl overflow-hidden shadow-glow max-w-full">
             <div className="flex items-center justify-between gap-2 px-4 py-3 border-b border-white/[0.06] bg-black/30">
               <div className="flex items-center gap-2 min-w-0">
                 <span className="h-3 w-3 rounded-full bg-rose-400/80 flex-none" />

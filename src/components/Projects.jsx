@@ -225,6 +225,9 @@ function ProjectCard({ project: p, tint, onOpen }) {
             {p.title}
           </h3>
           <p className="mt-2 text-sm md:text-base" style={{ color: 'rgba(242,237,227,0.80)' }}>{p.subtitle}</p>
+          {p.description && (
+            <p className="mt-2.5 text-[13px] leading-relaxed line-clamp-3" style={{ color: 'rgba(242,237,227,0.62)' }}>{p.description}</p>
+          )}
 
           {p.metrics && Object.keys(p.metrics).length > 0 && (
             <div className="mt-4 flex flex-wrap gap-1.5">

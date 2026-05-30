@@ -10,7 +10,7 @@ export default function Footer() {
           <span className="font-display text-white/85">{profile.name}</span>
         </div>
         <div className="text-xs font-mono text-white/40 uppercase tracking-[0.3em]">
-          © {year} — built with React · R3F · Framer · GSAP · Supabase
+          © {year} {profile.name}
         </div>
       </div>
     </footer>
